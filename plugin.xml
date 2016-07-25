@@ -7,10 +7,10 @@
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="Seguranca">
-				<param name="android-package" value="cordova-plugin-seguranca.Seguranca" />
+				<param name="android-package" value="cordova.plugin.seguranca.Seguranca" />
 			</feature>
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
-		<source-file src="src/android/Seguranca.java" target-dir="src/cordova-plugin-seguranca/Seguranca" />
+		<source-file src="src/android/Seguranca.java" target-dir="src/cordova.plugin.seguranca/Seguranca" />
 	</platform>
 </plugin>
