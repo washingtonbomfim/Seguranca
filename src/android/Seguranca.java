@@ -91,7 +91,7 @@ public class Seguranca extends CordovaPlugin {
           catch (Exception e)
           {
               e.printStackTrace();
-              callbackContext.error("Nao foi possivel");
+              callbackContext.error("Nao foi possivel: " + e.printStackTrace();
           }
           callbackContext.success(seguranca.getTextoEncrypt());
 
