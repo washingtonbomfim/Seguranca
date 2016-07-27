@@ -13,7 +13,6 @@
 		<config-file parent="/*" target="AndroidManifest.xml"></config-file>
 		<source-file src="src/android/Seguranca.java" target-dir="src/cordova.plugin.seguranca/Seguranca" />
 		<source-file src="src/android/commons-codec-1.10.jar" target-dir="libs" />
-		<source-file src="src/android/jce.jar" target-dir="libs" />
-		<source-file src="src/android/rt.jar" target-dir="libs" />
+
 	</platform>
 </plugin>
