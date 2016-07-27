@@ -54,13 +54,13 @@ public class Seguranca extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
+        if (action.equals("Encrypt")) {
             String message = args.getString(0);
             Seguranca s = new Seguranca();
             s.setTextoDecrypt(message);
             s.setChave("5faa90d3038ad41ec5ed89802807965c");
-            //this.Encrypt(s,callbackContext);
-            this.coolMethod(message, callbackContext);
+            this.Encrypt(s,callbackContext);
+            //this.coolMethod(message, callbackContext);
             return true;
         }
         return false;
