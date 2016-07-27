@@ -79,7 +79,7 @@ public class Seguranca extends CordovaPlugin {
         }
     }
 
-    private string Encrypt(Seguranca seguranca) {
+    private String Encrypt(Seguranca seguranca) {
 
           try{
               myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
