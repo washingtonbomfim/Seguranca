@@ -111,7 +111,7 @@ public class Seguranca extends CordovaPlugin {
         }
           catch (Exception e){
               e.printStackTrace();
-              return "Não foi possivel Descriptografar."
+              return "Não foi possivel Descriptografar.";
           }
 
           return  new String(decrypted);
