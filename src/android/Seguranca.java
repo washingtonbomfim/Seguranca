@@ -74,9 +74,9 @@ public class Seguranca extends CordovaPlugin {
         }
     }
 
-    public void Encrypt(Seguranca seguranca, CallbackContext callbackContext) {
-          try {
+    private void Encrypt(Seguranca seguranca, CallbackContext callbackContext) {
 
+          try{
               myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
               arrayBytes = this.getChave().getBytes(UNICODE_FORMAT);
               ks = new DESedeKeySpec(arrayBytes);
@@ -88,16 +88,14 @@ public class Seguranca extends CordovaPlugin {
               byte[] encryptedText = cipher.doFinal(plainText);
               seguranca.setTextoEncrypt(new String(Base64.encodeBase64(encryptedText)));
           }
-          catch (Exception e)
-          {
+          catch (Exception e){
               e.printStackTrace();
-              callbackContext.error("Nao foi possivel: " + e.printStackTrace();
+              callbackContext.error("Nao foi possivel Criptografar");
           }
           callbackContext.success(seguranca.getTextoEncrypt());
+        }
 
-      }
-
-    public String Decrypt(Seguranca seguranca){
+    private String Decrypt(Seguranca seguranca){
       byte[] decrypted = null;
       try{
         myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
