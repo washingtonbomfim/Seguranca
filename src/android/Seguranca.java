@@ -59,7 +59,7 @@ public class Seguranca extends CordovaPlugin {
             callbackContext.success(this.Encrypt("5faa90d3038ad41ec5ed89802807965c",message));
             return true;
         }else if(action.equals("Decrypt")){
-           callbackContext.success(this.Encrypt("5faa90d3038ad41ec5ed89802807965c",message));
+           callbackContext.success(this.Decrypt("5faa90d3038ad41ec5ed89802807965c",message));
            return true;
         }else{
           callbackContext.error("Metodo não Existe!");
