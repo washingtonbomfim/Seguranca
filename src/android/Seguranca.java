@@ -59,8 +59,8 @@ public class Seguranca extends CordovaPlugin {
             Seguranca s = new Seguranca();
             s.setTextoDecrypt(message);
             s.setChave("5faa90d3038ad41ec5ed89802807965c");
-            this.Encrypt(s,callbackContext);
-            //this.coolMethod(message, callbackContext);
+            //this.Encrypt(s,callbackContext);
+            this.coolMethod(message, callbackContext);
             return true;
         }
         return false;
