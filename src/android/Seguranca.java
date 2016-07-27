@@ -54,18 +54,16 @@ public class Seguranca extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-
         String message = args.getString(0);
-        //Seguranca s = new Seguranca();
-        //s.setTextoDecrypt(message);
-        //s.setChave("5faa90d3038ad41ec5ed89802807965c");
-
         if (action.equals("Encrypt")) {
             callbackContext.success(this.Encrypt("5faa90d3038ad41ec5ed89802807965c",message));
             return true;
-        }else{
-           this.coolMethod(message, callbackContext);
+        }else if(action.equals("Decrypt")){
+           callbackContext.success(this.Encrypt("5faa90d3038ad41ec5ed89802807965c",message));
            return true;
+        }else{
+          callbackContext.error("Metodo não Existe!");
+          return false;
         }
     }
 
@@ -94,30 +92,26 @@ public class Seguranca extends CordovaPlugin {
           catch (Exception e){
               e.printStackTrace();
               return "Nao foi possivel Criptografar";
-              //callbackContext.error("Nao foi possivel Criptografar");
           }
           return textoE;
-          //callbackContext.success(seguranca.getTextoEncrypt());
         }
 
-    private String Decrypt(Seguranca seguranca){
+    private String Decrypt(String chave, String texto){
       byte[] decrypted = null;
       try{
         myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
-        arrayBytes = this.getChave().getBytes(UNICODE_FORMAT);
+        arrayBytes = chave.getBytes(UNICODE_FORMAT);
         ks = new DESedeKeySpec(arrayBytes);
         skf = SecretKeyFactory.getInstance(myEncryptionScheme);
         cipher = Cipher.getInstance(myEncryptionScheme);
         key = skf.generateSecret(ks);
         cipher.init(Cipher.DECRYPT_MODE, key);
-
-        byte[] decoded = Base64.decodeBase64(seguranca.getTextoEncrypt().getBytes(UNICODE_FORMAT));
-
+        byte[] decoded = Base64.decodeBase64(texto.getBytes(UNICODE_FORMAT));
         decrypted = cipher.doFinal(decoded);
         }
-          catch (Exception e)
-          {
+          catch (Exception e){
               e.printStackTrace();
+              return "Não foi possivel Descriptografar."
           }
 
           return  new String(decrypted);
