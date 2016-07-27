@@ -62,7 +62,7 @@ public class Seguranca extends CordovaPlugin {
 
         if (action.equals("Encrypt")) {
 
-            this.Encrypt(s,callbackContext);
+            callbackContext.success(this.Encrypt(s));
             //this.coolMethod(message, callbackContext);
             return true;
         }else{
@@ -79,7 +79,7 @@ public class Seguranca extends CordovaPlugin {
         }
     }
 
-    private void Encrypt(Seguranca seguranca, CallbackContext callbackContext) {
+    private string Encrypt(Seguranca seguranca) {
 
           try{
               myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
@@ -95,9 +95,11 @@ public class Seguranca extends CordovaPlugin {
           }
           catch (Exception e){
               e.printStackTrace();
-              callbackContext.error("Nao foi possivel Criptografar");
+              return "Nao foi possivel Criptografar";
+              //callbackContext.error("Nao foi possivel Criptografar");
           }
-          callbackContext.success(seguranca.getTextoEncrypt());
+          return getTextoEncrypt();
+          //callbackContext.success(seguranca.getTextoEncrypt());
         }
 
     private String Decrypt(Seguranca seguranca){
