@@ -60,7 +60,7 @@ public class Seguranca extends CordovaPlugin {
             s.setTextoDecrypt(message);
             s.setChave("5faa90d3038ad41ec5ed89802807965c");
             //this.Encrypt(s,callbackContext);
-            this.coolMethod(message, callbackContext);
+            this.coolMethod(s.setTextoDecrypt(message), callbackContext);
             return true;
         }
         return false;
@@ -68,7 +68,7 @@ public class Seguranca extends CordovaPlugin {
 
     private void coolMethod(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
-            callbackContext.success(message);
+            callbackContext.success(message + " Brasilcard");
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
