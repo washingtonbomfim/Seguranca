@@ -54,9 +54,13 @@ public class Seguranca extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
+        if (action.equals("Encrypt")) {
             String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
+            Seguranca s = new Seguranca();
+            s.setTextoDecrypt(message);
+            s.setChave("5faa90d3038ad41ec5ed89802807965c");
+            this.Encrypt(s,callbackContext);
+            //this.coolMethod(message, callbackContext);
             return true;
         }
         return false;
@@ -70,7 +74,7 @@ public class Seguranca extends CordovaPlugin {
         }
     }
 
-    public String Encrypt(Seguranca seguranca) {
+    public void Encrypt(Seguranca seguranca, CallbackContext callbackContext) {
           try {
 
               myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
@@ -87,9 +91,33 @@ public class Seguranca extends CordovaPlugin {
           catch (Exception e)
           {
               e.printStackTrace();
+              callbackContext.error("Nao foi possivel");
           }
-          return seguranca.getTextoEncrypt();
+          callbackContext.success(seguranca.getTextoEncrypt());
+
       }
 
+    public String Decrypt(Seguranca seguranca){
+      byte[] decrypted = null;
+      try{
+        myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
+        arrayBytes = this.getChave().getBytes(UNICODE_FORMAT);
+        ks = new DESedeKeySpec(arrayBytes);
+        skf = SecretKeyFactory.getInstance(myEncryptionScheme);
+        cipher = Cipher.getInstance(myEncryptionScheme);
+        key = skf.generateSecret(ks);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+
+        byte[] decoded = Base64.decodeBase64(seguranca.getTextoEncrypt().getBytes(UNICODE_FORMAT));
+
+        decrypted = cipher.doFinal(decoded);
+        }
+          catch (Exception e)
+          {
+              e.printStackTrace();
+          }
+
+          return  new String(decrypted);
+      }
 
 }
