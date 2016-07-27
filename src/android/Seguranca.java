@@ -69,7 +69,6 @@ public class Seguranca extends CordovaPlugin {
            this.coolMethod(message, callbackContext);
            return true;
         }
-        return false;
     }
 
     private void coolMethod(String message, CallbackContext callbackContext) {
