@@ -14,6 +14,44 @@ import javax.crypto.spec.DESedeKeySpec;
 
 public class Seguranca extends CordovaPlugin {
 
+    private static final String UNICODE_FORMAT = "UTF8";
+    public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
+    private KeySpec ks;
+    private SecretKeyFactory skf;
+    private Cipher cipher;
+    byte[] arrayBytes;
+    SecretKey key;
+
+    private String myEncryptionScheme;
+
+    private String TextoDecrypt;
+    private String TextoEncrypt;
+    private String Chave;
+
+    public String getTextoDecrypt() {
+        return TextoDecrypt;
+    }
+
+    public void setTextoDecrypt(String textoDecrypt) {
+        TextoDecrypt = textoDecrypt;
+    }
+
+    public String getTextoEncrypt() {
+        return TextoEncrypt;
+    }
+
+    public void setTextoEncrypt(String textoEncrypt) {
+        TextoEncrypt = textoEncrypt;
+    }
+
+    public String getChave() {
+        return Chave;
+    }
+
+    public void setChave(String chave) {
+        Chave = chave;
+    }
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("coolMethod")) {
@@ -31,4 +69,27 @@ public class Seguranca extends CordovaPlugin {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
+
+    public String Encrypt(Seguranca seguranca) {
+          try {
+
+              myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
+              arrayBytes = this.getChave().getBytes(UNICODE_FORMAT);
+              ks = new DESedeKeySpec(arrayBytes);
+              skf = SecretKeyFactory.getInstance(myEncryptionScheme);
+              cipher = Cipher.getInstance(myEncryptionScheme);
+              key = skf.generateSecret(ks);
+              cipher.init(Cipher.ENCRYPT_MODE, key);
+              byte[] plainText = seguranca.getTextoDecrypt().getBytes(UNICODE_FORMAT);
+              byte[] encryptedText = cipher.doFinal(plainText);
+              seguranca.setTextoEncrypt(new String(Base64.encodeBase64(encryptedText)));
+          }
+          catch (Exception e)
+          {
+              e.printStackTrace();
+          }
+          return seguranca.getTextoEncrypt();
+      }
+
+
 }
