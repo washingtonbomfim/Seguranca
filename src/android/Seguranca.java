@@ -56,14 +56,12 @@ public class Seguranca extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 
         String message = args.getString(0);
-        Seguranca s = new Seguranca();
-        s.setTextoDecrypt(message);
-        s.setChave("5faa90d3038ad41ec5ed89802807965c");
+        //Seguranca s = new Seguranca();
+        //s.setTextoDecrypt(message);
+        //s.setChave("5faa90d3038ad41ec5ed89802807965c");
 
         if (action.equals("Encrypt")) {
-
-            callbackContext.success(this.Encrypt(s));
-            //this.coolMethod(message, callbackContext);
+            callbackContext.success(this.Encrypt("5faa90d3038ad41ec5ed89802807965c",message));
             return true;
         }else{
            this.coolMethod(message, callbackContext);
@@ -79,26 +77,26 @@ public class Seguranca extends CordovaPlugin {
         }
     }
 
-    private String Encrypt(Seguranca seguranca) {
-
+    private String Encrypt(String chave, String texto) {
+          String textoE = "";
           try{
               myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
-              arrayBytes = this.getChave().getBytes(UNICODE_FORMAT);
+              arrayBytes = chave.getBytes(UNICODE_FORMAT);
               ks = new DESedeKeySpec(arrayBytes);
               skf = SecretKeyFactory.getInstance(myEncryptionScheme);
               cipher = Cipher.getInstance(myEncryptionScheme);
               key = skf.generateSecret(ks);
               cipher.init(Cipher.ENCRYPT_MODE, key);
-              byte[] plainText = seguranca.getTextoDecrypt().getBytes(UNICODE_FORMAT);
+              byte[] plainText = texto.getBytes(UNICODE_FORMAT);
               byte[] encryptedText = cipher.doFinal(plainText);
-              seguranca.setTextoEncrypt(new String(Base64.encodeBase64(encryptedText)));
+              textoE = new String(Base64.encodeBase64(encryptedText));
           }
           catch (Exception e){
               e.printStackTrace();
               return "Nao foi possivel Criptografar";
               //callbackContext.error("Nao foi possivel Criptografar");
           }
-          return getTextoEncrypt();
+          return textoE;
           //callbackContext.success(seguranca.getTextoEncrypt());
         }
 
