@@ -38,7 +38,7 @@ public class Seguranca extends CordovaPlugin {
 					return false;
 				}
 
-				return 	callbackContext.error(args)
+				return 	callbackContext.error(args);
 		}
 
 		private String Encrypt(String chave, String texto) {
