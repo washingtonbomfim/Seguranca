@@ -28,10 +28,10 @@ public class Seguranca extends CordovaPlugin {
 				String message = args.getString(0);
         String chave = args.getString(1);
 				if (action.equals("Encrypt")) {
-						callbackContext.success(chave,message);
+						callbackContext.success(Encrypt(chave,message));
 						return true;
 				}else if(action.equals("Decrypt")){
-					 callbackContext.success(chave,message);
+					 callbackContext.success(Decrypt(chave,message));
 					 return true;
 				}else{
 					callbackContext.error("Metodo não Existe!");
