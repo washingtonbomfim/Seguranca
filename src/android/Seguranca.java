@@ -27,7 +27,7 @@ public class Seguranca extends CordovaPlugin {
 		public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 				String message = args.getString(0);
         String chave = args.getString(1);
-				mensage = mensage + " " + chave;
+				message = message + " " + chave;
 				/*if (action.equals("Encrypt")) {
 						callbackContext.success(Encrypt(chave,message));
 						return true;
@@ -38,7 +38,7 @@ public class Seguranca extends CordovaPlugin {
 					callbackContext.error("Metodo não Existe!");
 					return false;
 				}*/
-				callbackContext.success(teste(mensage));
+				callbackContext.success(teste(message));
 				return 	true;
 		}
 
