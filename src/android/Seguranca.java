@@ -37,8 +37,8 @@ public class Seguranca extends CordovaPlugin {
 					callbackContext.error("Metodo não Existe!");
 					return false;
 				}*/
-
-				return 	callbackContext.success(teste(chave));
+				callbackContext.success(teste(chave));
+				return 	true;
 		}
 
 		private String teste(String x){
