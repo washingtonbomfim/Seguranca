@@ -2,7 +2,7 @@ var exec = require('cordova/exec');
 
 exports.Encrypt = function(arg0,arg1, success, error) {
     exec(function(p) {
-        success(p);
+        callback(p);
     }, error, "Seguranca", "Encrypt", [arg0,arg1]);
 };
 
